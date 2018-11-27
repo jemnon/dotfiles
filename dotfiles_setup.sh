@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dotfiles=(".vim" ".zshrc" ".oh-my-zsh" ".gitmodules")
+dotfiles=("vimrc" ".zshrc" ".gitmodules")
 
 dir="${HOME}/Projects/dotfiles"
 
