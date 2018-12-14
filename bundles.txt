@@ -1,0 +1,11 @@
+- ale
+- command-t
+- indentLine
+- lightline.vim
+- neocomplete.vim
+- nerdtree
+- vim-colors-solarized
+- vim-es6
+- vim-prettier
+- vim-tmux-navigator
+- Vundle.vim
