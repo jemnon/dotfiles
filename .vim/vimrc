@@ -15,8 +15,9 @@ set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
 set gcr=a:blinkon0              "Disable cursor blink
-set visualbell                  "No sounds
+set novisualbell                "No sounds
 set autoread                    "Reload files changed outside vim
+set belloff=all
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -34,13 +35,23 @@ let mapleader=","
 
 " =============== Vundle ===============
 
-filetype off
+" filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'isRuslan/vim-es6'
 call vundle#end()
 filetype plugin indent on
+
+" ================ Syntastic ==============
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
 
 " ================ Turn Off Swap Files ==============
 
@@ -141,17 +152,19 @@ let g:prettier#config#jsx_bracket_same_line = 'false'
 let g:prettier#config#print_width = 80
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
+let g:prettier#config#config_precedence = 'file-override'
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " ================ Color Settings ========================
 
 syntax on
-colorscheme solarized
+"colorscheme atom-dark
+"colorscheme solarized
 "colorscheme abstract
 "colorscheme wombat
 "colorscheme molokai
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'seoul256',
       \ }
 
 " ================ Golang ========================
