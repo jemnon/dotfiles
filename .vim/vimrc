@@ -7,6 +7,12 @@ if filereadable(expand("~/.vimrc.before"))
   source ~/.vimrc.before
 endif
 
+" ================ Pathogen ========================
+
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
 " ================ General Config ====================
 
 set number                      "Line numbers are good
@@ -24,14 +30,47 @@ set belloff=all
 " http://items.sjbach.com/319/configuring-vim-right
 set hidden
 
-"turn on syntax highlighting
-syntax on
-
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
 " The mapleader has to be set before vundle starts loading all
 " the plugins.
 let mapleader=","
+
+" ================ Search Settings ========================
+
+map <esc> :noh<cr>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+nnoremap gg :Ag<SPACE>
+
+" ================ Color Settings ========================
+
+syntax on
+let g:onedark_termcolors=16
+"colorscheme lucario 
+colorscheme onedark
+"colorscheme solarized
+"colorscheme abstract
+"colorscheme wombat
+"colorscheme molokai
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ }
 
 " =============== Vundle ===============
 
@@ -149,29 +188,11 @@ autocmd VimEnter * wincmd p
 let g:prettier#autoformat = 0
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#jsx_bracket_same_line = 'false'
-let g:prettier#config#print_width = 80
+let g:prettier#config#print_width = 120
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
 let g:prettier#config#config_precedence = 'file-override'
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
-
-" ================ Color Settings ========================
-
-syntax on
-"colorscheme atom-dark
-"colorscheme solarized
-"colorscheme abstract
-"colorscheme wombat
-"colorscheme molokai
-let g:lightline = {
-      \ 'colorscheme': 'seoul256',
-      \ }
-
-" ================ Golang ========================
-
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
 
 " ================ Vim Diff ========================
 

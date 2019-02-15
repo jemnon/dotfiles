@@ -7,11 +7,13 @@
 - mustache
 - neocomplete.vim
 - nerdtree
-- vim-javascript-syntax
-- vim-javascript
+- syntastic
 - vim-jsx
 - vim-polyglot
 - vim-prettier
 - vim-tmux-navigator
-- vimterial_dark
 - Vundle.vim
+
+Autoload
+- onedark.vim
+- pathogen.vim
